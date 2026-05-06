@@ -1,0 +1,30 @@
+# Virtual environment
+.venv/
+venv/
+
+# direnv
+.direnv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary / output files
+*.epub
+*.pdf
+tmp/
+temp/
