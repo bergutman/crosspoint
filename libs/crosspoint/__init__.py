@@ -2,5 +2,6 @@
 
 from .client import CrossPointClient
 from .models import DeviceStatus, FileEntry
+from .queue import UploadQueue
 
-__all__ = ["CrossPointClient", "DeviceStatus", "FileEntry"]
+__all__ = ["CrossPointClient", "DeviceStatus", "FileEntry", "UploadQueue"]

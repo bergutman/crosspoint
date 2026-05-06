@@ -17,6 +17,10 @@ pip install -e ".[dev,epub]"
 
 # Test connectivity to your device
 python -m crosspoint --host 172.20.10.8 status
+
+# Manage upload queue
+python -m crosspoint queue               # list pending uploads
+python -m crosspoint queue --process     # upload everything queued
 ```
 
 ## Monorepo Layout

@@ -6,6 +6,7 @@ import argparse
 import sys
 
 from .client import CrossPointClient
+from .queue import UploadQueue
 
 
 def main() -> int:
@@ -20,6 +21,10 @@ def main() -> int:
     upload_parser = subparsers.add_parser("upload", help="Upload a file")
     upload_parser.add_argument("file", help="Local file path")
     upload_parser.add_argument("--dir", default="/", help="Remote directory")
+
+    queue_parser = subparsers.add_parser("queue", help="Manage upload queue")
+    queue_parser.add_argument("--process", action="store_true", help="Process all queued uploads")
+    queue_parser.add_argument("--clear", action="store_true", help="Clear the queue")
 
     args = parser.parse_args()
     if not args.command:
@@ -46,6 +51,29 @@ def main() -> int:
     elif args.command == "upload":
         result = client.upload_file(args.file, args.dir)
         print(result)
+
+    elif args.command == "queue":
+        queue = UploadQueue()
+
+        if args.clear:
+            count = queue.clear()
+            print(f"Cleared {count} item(s) from queue.")
+            return 0
+
+        if args.process:
+            successes, failures = queue.process(client=client)
+            print(f"\nDone: {successes} uploaded, {failures} failed/remaining.")
+            return 0
+
+        entries = queue.list()
+        if not entries:
+            print("Queue is empty.")
+            return 0
+
+        print(f"{'ID':<14} {'Filename':<30} {'Directory':<15} {'Host':<20} {'Attempts'}")
+        print("-" * 90)
+        for e in entries:
+            print(f"{e.id:<14} {e.filename:<30} {e.remote_dir:<15} {e.host:<20} {e.attempts}/{3}")
 
     return 0
 

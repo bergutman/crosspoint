@@ -62,14 +62,15 @@ class CrossPointClient:
         resp = self._get("/api/files", params={"path": path})
         return [FileEntry.from_json(item) for item in resp.json()]
 
-    def upload_file(self, local_path: Path | str, remote_dir: str = "/") -> str:
+    def upload_file(self, local_path: Path | str, remote_dir: str = "/", filename: str | None = None) -> str:
         """Upload a file via HTTP multipart POST /upload."""
         local_path = Path(local_path)
         if not local_path.exists():
             raise CrossPointError(f"Local file not found: {local_path}")
 
+        upload_name = filename or local_path.name
         with local_path.open("rb") as f:
-            files = {"file": (local_path.name, f)}
+            files = {"file": (upload_name, f)}
             resp = self._post("/upload", params={"path": remote_dir}, files=files)
         return resp.text
 

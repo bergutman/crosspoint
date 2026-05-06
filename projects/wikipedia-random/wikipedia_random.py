@@ -200,19 +200,25 @@ def main() -> int:
 
     if args.upload:
         from crosspoint import CrossPointClient
+        from crosspoint.queue import UploadQueue
 
         client = CrossPointClient(host=args.host)
+        queue = UploadQueue()
 
         # Ensure target folder exists
         try:
             client.mkdir(args.dir.strip("/"), parent="/")
         except Exception:
-            # Folder likely already exists; safe to ignore
             pass
 
         print(f"Uploading to {args.host}{args.dir} ...")
-        result = client.upload_file(output_path, args.dir)
-        print(result)
+        try:
+            result = client.upload_file(output_path, args.dir)
+            print(result)
+        except requests.exceptions.ConnectionError:
+            entry = queue.add(output_path, args.dir, args.host)
+            print(f"Device unreachable — queued {entry.filename} for later transfer.")
+            print(f"Run: python -m crosspoint queue --process")
 
     print("Done!")
     return 0
