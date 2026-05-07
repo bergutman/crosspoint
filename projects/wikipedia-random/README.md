@@ -15,7 +15,7 @@ python projects/wikipedia-random/wikipedia_random.py -o "My Article.epub"
 python projects/wikipedia-random/wikipedia_random.py --upload
 
 # Upload to a specific folder / device
-python projects/wikipedia-random/wikipedia_random.py --upload --host 172.20.10.8 --dir /Wikipedia
+python projects/wikipedia-random/wikipedia_random.py --upload --host 192.168.68.51 --dir /Wikipedia
 
 # Daily cron mode — prepends the date to the title and filename
 python projects/wikipedia-random/wikipedia_random.py --daily --upload

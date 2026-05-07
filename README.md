@@ -16,7 +16,7 @@ source .venv/bin/activate
 pip install -e ".[dev,epub]"
 
 # Test connectivity to your device
-python -m crosspoint --host 172.20.10.8 status
+python -m crosspoint --host 192.168.68.51 status
 
 # Manage upload queue
 python -m crosspoint queue               # list pending uploads
@@ -58,10 +58,10 @@ Key endpoints:
 ```python
 from crosspoint import CrossPointClient
 
-client = CrossPointClient("172.20.10.8")
+client = CrossPointClient("192.168.68.51")
 client.upload_file("mybook.epub", "/Books")
 ```
 
 ## Device IP
 
-If your network does not support mDNS (`crosspoint.local`), use the IP shown on the device screen. The current coffee shop IP is **172.20.10.8**.
+If your network does not support mDNS (`crosspoint.local`), use the IP shown on the device screen. The current home IP is **192.168.68.51**.

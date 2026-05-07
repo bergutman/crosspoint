@@ -15,6 +15,6 @@
 
 ## Device Defaults
 - Default host: `crosspoint.local`
-- Fallback IP (coffee shop): `172.20.10.8`
+- Fallback IP (home): `192.168.68.51`
 - HTTP API port: `80`
 - WebSocket upload port: `81`

@@ -164,7 +164,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Random Wikipedia article → EPUB")
     parser.add_argument("--output", "-o", type=Path, help="Output file path")
     parser.add_argument("--upload", "-u", action="store_true", help="Upload to CrossPoint")
-    parser.add_argument("--host", default="172.20.10.8", help="CrossPoint host/IP")
+    parser.add_argument("--host", default="192.168.68.51", help="CrossPoint host/IP")
     parser.add_argument("--dir", default="/Wikipedia", help="Remote directory")
     parser.add_argument("--daily", action="store_true", help="Daily run mode: prepend date to title and filename")
     args = parser.parse_args()
